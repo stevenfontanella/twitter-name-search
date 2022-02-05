@@ -34,6 +34,7 @@ def rate_limit(f, delay=60):
 @rate_limit
 def user_exists(username):
     try:
+        # TODO: maybe I should write my own getUser that is rate-limited, then leave the catching logic here
         api.GetUser(screen_name=username)
     except twitter.error.TwitterError as e:
         code = e.args[0][0]["code"]
@@ -53,12 +54,13 @@ def search(names):
                 print(f"{name} is available")
     finally:
         print(f"Processed {i} names")
+        print(f"Finished with {name}")
     # for name in filterfalse(user_exists, names):
     #     print(f"{name} is available")
 
 def main():
     start = 0
-    count = 10000
+    count = 100
     tries = islice(("".join(chain(fst, cs)) for fst, cs in product(ascii_lowercase[ascii_lowercase.find("q"):], product(ascii_lowercase, repeat=4))), start, start + count)
     # print(list(tries))
     # print(list(tries))
