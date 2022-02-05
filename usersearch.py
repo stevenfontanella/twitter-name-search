@@ -58,10 +58,24 @@ def search(names):
     # for name in filterfalse(user_exists, names):
     #     print(f"{name} is available")
 
+def names():
+    with open("fivewords.txt") as f:
+        for line in f:
+            yield line.rstrip("\n")
+
 def main():
-    start = 0
-    count = 100
-    tries = islice(("".join(chain(fst, cs)) for fst, cs in product(ascii_lowercase[ascii_lowercase.find("q"):], product(ascii_lowercase, repeat=4))), start, start + count)
+    # start = 0
+    # count = 100
+
+    # tries = islice(names(), start, start + count)
+    # tries = names()
+
+    tries = ("".join(chain("qu", *p)) for p in product(ascii_lowercase, repeat=3))
+    # print(list(islice(tries, 100)))
+    # tries = islice(tries, 100)
+    # print(list(tries))
+
+    # tries = islice(("".join(chain(fst, cs)) for fst, cs in product(ascii_lowercase[ascii_lowercase.find("q"):], product(ascii_lowercase, repeat=4))), start, start + count)
     # print(list(tries))
     # print(list(tries))
     search(tries)
