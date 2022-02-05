@@ -1,0 +1,1 @@
+python3 -u usersearch.py | tee -i out.txt
